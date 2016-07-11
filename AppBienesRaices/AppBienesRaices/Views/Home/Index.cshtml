@@ -1,0 +1,25 @@
+﻿@model IEnumerable<AppBienesRaices.Models.Bien>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="text-center">
+        <h1>Bienes</h1>
+    </div>
+    <div class="row">
+        @foreach (var bien  in Model)
+        {
+            <div class="col-md-4">
+                <div class="well">
+                    <img class="thumbnail img-responsive"src="~/Images/@bien.ImageUrl"/>
+                    <span>Fecha de publicacion: @bien.DateWhenPublish</span>
+                    <br/>
+                    <span>Direccion: @bien.Adress</span>
+                    <br/>
+                    <span><a href="/Bien/Details/@bien.ID">Ver mas</a></span>
+                </div>
+            </div>
+        }
+    </div>
+</div>

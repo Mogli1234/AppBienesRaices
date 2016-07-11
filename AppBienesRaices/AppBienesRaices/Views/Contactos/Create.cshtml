@@ -1,0 +1,77 @@
+﻿@model AppBienesRaices.Models.Contacto
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOVYU-5S5oquI9lbG9MZ5b0P_Yd9MePtQ&callback=initMap">
+</script>
+
+<script>
+   function initMap() {
+       var mapDiv = document.getElementById('googleMap');
+       var map = new google.maps.Map(mapDiv, {
+           center: { lat: 10.329743, lng: -84.432773 },
+           zoom: 100
+       });
+   }
+</script>
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Contacto</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Mensaje, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Mensaje, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Mensaje, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+    {
+        <a href="/Contactos">Contactos Index</a>
+        <a>|</a>
+    }
+    <a href="/">Volver</a>
+</div>
+
+<h2 style="width:100%;height:10%;text-align:center;position:relative;top:40%">Nuestras Oficinas</h2>
+<div id="googleMap" style="width: 70%;height:380px;margin-right: 100px;margin-left: 200px;"></div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

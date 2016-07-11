@@ -1,0 +1,76 @@
+﻿@model AppBienesRaices.Models.Bien
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Bien</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Tipo
+        </dt>
+        <dd>
+            @if (Model.Type)
+            {
+                <p>Vivienda</p>
+            }
+            else
+            {
+                <p>Lote</p>
+            }
+        </dd>
+        <dt>
+            Ciudad
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt>
+            Direccion
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Adress)
+        </dd>
+        <dt>
+            Fecha de publicacion
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateWhenPublish)
+        </dd>
+        <dt>
+            Precion original
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OriginalPrice)
+        </dd>
+        <dt>
+            Nuevo Precio
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NewPrice)
+        </dd>
+        <dt>
+            Fotografia del Bien
+        </dt>
+        <dd>
+            <img src="~/Images/@Model.ImageUrl"/>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Editar", "Edit", new { id = Model.ID }) <span>|</span>
+        @Html.ActionLink("Volver a la Lista", "Index")
+        <span>|</span>
+    }
+    <a href="/">Atras</a> | 
+    <a href="/contactos/create">Conctacto</a>
+
+
+</p>

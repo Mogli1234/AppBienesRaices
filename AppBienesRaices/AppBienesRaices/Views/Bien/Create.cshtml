@@ -1,0 +1,76 @@
+﻿@model AppBienesRaices.Models.Bien
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Agregar Bienes</h2>
+<div class="col-lg-6">
+    @using (Html.BeginForm("Create", "Bien", FormMethod.Post,
+                    new { enctype = "multipart/form-data" }))
+    {
+        <form role="form">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>Tipo de Bien</label>
+                    <br/>
+                    <label>
+                        @Html.EditorFor(model => model.Type)
+                        Vivienda<span>*Si su Bien es un lote no marcar esta casilla</span>
+                        @Html.ValidationMessageFor(model => model.Type, "", new {@class = "text-danger"})
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label for="City">Ciudad</label>
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                <label for="Adress">Direccion</label>
+                <textarea name="Adress" class="form-control"></textarea>
+                @Html.ValidationMessageFor(model => model.Adress, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label for="DateWhenPublish">Fecha de Publicacion</label>
+                <input type="text" name="DateWhenPublish" class="form-control"  value="@DateTime.Today.ToString("d")"/>
+                @Html.ValidationMessageFor(model => model.DateWhenPublish, "", new {@class = "text-danger"})
+
+            </div>
+
+            <div class="form-group">
+                <label for="OriginalPrice">Precio Original</label>
+                <input type="number" name="OriginalPrice" class="form-control"/>
+                @Html.ValidationMessageFor(model => model.OriginalPrice, "", new {@class = "text-danger"})
+            </div>
+
+            <div class="form-group">
+                <label for="NewPrice">Nuevo Precio</label>
+                <input type="number" name="NewPrice" class="form-control" />
+                @Html.ValidationMessageFor(model => model.NewPrice, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label for="ImageUrl">Fotografia del Bien</label>
+                <input type="file" class="" name="ImageUrl"/>
+                @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+
+            </div>
+                    <input type="submit" value="Create" class="btn btn-default" />
+        </form>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

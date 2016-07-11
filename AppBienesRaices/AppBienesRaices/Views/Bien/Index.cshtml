@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AppBienesRaices.Models.Bien>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Bienes </h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Vivienda
+        </th>
+        <th>
+            Cuidad
+        </th>
+        <th>
+            Dirección
+            
+        </th>
+        <th>
+            Fecha de publicacion
+        </th>
+        <th>
+            Precio Original
+        </th>
+        <th>
+            Nuevo Precio
+        </th>
+        <th> Acciones</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateWhenPublish)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OriginalPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NewPrice)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
